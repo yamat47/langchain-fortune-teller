@@ -1,0 +1,18 @@
+#chat-container
+  .chat-header
+    %h1 AWS占い - あなたの気分に合うAWSサービスを占います
+
+  #messages.messages-container
+    .message.bot-message
+      .message-content
+        %p こんにちは！今日の気分を教えてください。
+        %p あなたにぴったりのAWSサービスを占います。
+
+  .chat-input-container
+    = form_with url: fortune_tellings_path, method: :post, local: false, class: "chat-form" do |f|
+      .input-group
+        = text_field_tag :message, "", 
+            placeholder: "今日の気分を入力してください...", 
+            class: "message-input",
+            autocomplete: "off"
+        = submit_tag "送信", class: "send-button"

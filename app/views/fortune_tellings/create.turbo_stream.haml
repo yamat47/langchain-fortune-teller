@@ -1,0 +1,19 @@
+= turbo_stream.append "messages" do
+  .message.user-message
+    .message-content
+      %p= @user_message
+  
+  .message.bot-message
+    .message-content
+      %p
+        %strong= "おすすめのAWSサービス: #{@bot_response[:service]}"
+      %p= @bot_response[:reason]
+      %p.article-link
+        参考記事:
+        %a{href: @bot_response[:article], target: "_blank", rel: "noopener"} 導入事例を見る
+
+= turbo_stream.update "message" do
+  = text_field_tag :message, "", 
+      placeholder: "今日の気分を入力してください...", 
+      class: "message-input",
+      autocomplete: "off"

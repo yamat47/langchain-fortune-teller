@@ -1,0 +1,24 @@
+<%= turbo_stream.append "messages" do %>
+  <div class="message user-message">
+    <div class="message-content">
+      <p><%= @user_message %></p>
+    </div>
+  </div>
+  
+  <div class="message bot-message">
+    <div class="message-content">
+      <p><strong>おすすめのAWSサービス: <%= @bot_response[:service] %></strong></p>
+      <p><%= @bot_response[:reason] %></p>
+      <p class="article-link">
+        参考記事: <a href="<%= @bot_response[:article] %>" target="_blank" rel="noopener">導入事例を見る</a>
+      </p>
+    </div>
+  </div>
+<% end %>
+
+<%= turbo_stream.update "message" do %>
+  <%= text_field_tag :message, "", 
+      placeholder: "今日の気分を入力してください...", 
+      class: "message-input",
+      autocomplete: "off" %>
+<% end %>

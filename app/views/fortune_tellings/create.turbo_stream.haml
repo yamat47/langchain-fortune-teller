@@ -1,0 +1,46 @@
+= turbo_stream.replace "temp-loading-indicator" do
+  .message.bot-message
+    .message-content.fortune-result
+      .service-recommendation
+        %p.lead-text あなたにぴったりのサービスは...
+        %h2.service-name= @service_name
+        %p.service-subtitle= @service_description
+      
+      .recommendation-reason
+        %p= @reason
+      
+      .reference-section
+        %p.article-link
+          参考記事：
+          %a{href: @reference_url, target: "_blank", rel: "noopener"} 詳しく見る
+
+= turbo_stream.append "messages" do
+  :javascript
+    setTimeout(() => {
+      const form = document.querySelector('[data-controller="fortune-form"]');
+      if (form) {
+        const controller = form.closest('[data-controller]');
+        if (controller && controller._stimulusControllers) {
+          const fortuneController = controller._stimulusControllers.find(c => c.identifier === 'fortune-form');
+          if (fortuneController && fortuneController.reset) {
+            fortuneController.reset();
+          }
+        } else {
+          // Fallback: manually reset form
+          const button = form.querySelector('[data-fortune-form-target="button"]');
+          const input = form.querySelector('[data-fortune-form-target="input"]');
+          if (button) {
+            button.disabled = false;
+            button.textContent = "送信";
+          }
+          if (input) {
+            input.disabled = false;
+          }
+        }
+      }
+      // Scroll to bottom
+      const messages = document.getElementById('messages');
+      if (messages) {
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }, 100);

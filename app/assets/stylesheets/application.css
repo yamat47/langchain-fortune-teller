@@ -1,0 +1,324 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #232F3E;
+  color: #FFFFFF;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #37475A;
+}
+
+.chat-header {
+  background: linear-gradient(135deg, #FF9900 0%, #FEBD69 100%);
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.chat-header h1 {
+  color: #232F3E;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.restart-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #232F3E;
+  color: #FFFFFF;
+  text-decoration: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.restart-button:hover {
+  background-color: #37475A;
+  transform: translateY(-1px);
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #FAFAFA;
+}
+
+.message {
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.user-message {
+  justify-content: flex-end;
+}
+
+.bot-message {
+  justify-content: flex-start;
+}
+
+.message-content {
+  max-width: 70%;
+  padding: 15px 20px;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-message .message-content {
+  background-color: #FF9900;
+  color: #FFFFFF;
+  border-bottom-right-radius: 5px;
+}
+
+.bot-message .message-content {
+  background-color: #FFFFFF;
+  color: #232F3E;
+  border-bottom-left-radius: 5px;
+  border: 1px solid #E5E5E5;
+}
+
+.message-content p {
+  margin-bottom: 10px;
+}
+
+.message-content p:last-child {
+  margin-bottom: 0;
+}
+
+.article-link {
+  font-size: 14px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #E5E5E5;
+}
+
+.article-link a {
+  color: #FF9900;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.article-link a:hover {
+  color: #FEBD69;
+  text-decoration: underline;
+}
+
+.chat-input-container {
+  padding: 20px;
+  background-color: #37475A;
+  border-top: 1px solid #4A5568;
+}
+
+.chat-form {
+  width: 100%;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.message-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid #4A5568;
+  border-radius: 25px;
+  background-color: #FFFFFF;
+  color: #232F3E;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.message-input:focus {
+  border-color: #FF9900;
+}
+
+.message-input::placeholder {
+  color: #95999C;
+}
+
+.send-button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #FF9900 0%, #FEBD69 100%);
+  color: #232F3E;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.send-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 153, 0, 0.3);
+}
+
+.send-button:active {
+  transform: translateY(0);
+}
+
+.send-button:disabled,
+.send-button.disabled-empty {
+  background: #999 !important;
+  background-image: none !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+  opacity: 0.8;
+}
+
+.message-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Loading Indicator */
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.loading-indicator.hidden {
+  display: none;
+}
+
+.typing-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.typing-dots span {
+  width: 8px;
+  height: 8px;
+  background-color: #FF9900;
+  border-radius: 50%;
+  animation: typing 1.4s infinite;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  30% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+/* Fortune Result Styles */
+.fortune-result .service-recommendation {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.fortune-result .lead-text {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.fortune-result .service-name {
+  color: #FF9900;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
+  padding: 10px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #FF9900 0%, #FEBD69 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.fortune-result .service-subtitle {
+  color: #888;
+  font-size: 13px;
+  margin-top: 5px;
+  font-style: italic;
+}
+
+.fortune-result .recommendation-reason {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #F7F7F7;
+  border-left: 4px solid #FF9900;
+  border-radius: 5px;
+}
+
+.fortune-result .recommendation-reason p {
+  color: #333;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.fortune-result .reference-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.fortune-result .reference-section .article-link {
+  background-color: #FFF;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.fortune-result .reference-section a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #FF9900 0%, #FEBD69 100%);
+  color: white;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.fortune-result .reference-section a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 153, 0, 0.3);
+  color: white;
+}

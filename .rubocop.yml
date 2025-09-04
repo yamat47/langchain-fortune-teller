@@ -1,0 +1,17 @@
+plugins: rubocop-rails
+
+AllCops:
+  TargetRailsVersion: 8.0
+  NewCops: enable
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false

@@ -1,0 +1,14 @@
+.message.bot-message{ id: dom_id(message) }
+  .message-content.fortune-result
+    .service-recommendation
+      %p.lead-text あなたにぴったりのサービスは...
+      %h2.service-name= message.messageable.service_name
+      %p.service-subtitle= message.messageable.service_description
+    
+    .recommendation-reason
+      %p= message.messageable.reason
+    
+    .reference-section
+      %p.article-link
+        参考記事：
+        %a{href: message.messageable.reference_url, target: "_blank", rel: "noopener"} 詳しく見る

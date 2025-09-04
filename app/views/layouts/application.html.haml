@@ -1,0 +1,44 @@
+!!!
+%html
+  %head
+    %title= content_for(:title) || "LangChainのデモンストレーション"
+    %meta{name: "viewport", content: "width=device-width,initial-scale=1"}
+    %meta{name: "description", content: "LangChainのデモンストレーションアプリ。"}
+    %meta{charset: "utf-8"}
+    
+    -# Open Graph
+    %meta{property: "og:title", content: "LangChainのデモンストレーション"}
+    %meta{property: "og:description", content: "LangChainのデモンストレーションアプリ。"}
+    
+    %meta{name: "apple-mobile-web-app-capable", content: "yes"}
+    %meta{name: "mobile-web-app-capable", content: "yes"}
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = yield :head
+
+    -# Favicon
+    %link{rel: "icon", type: "image/x-icon", href: "/favicon.ico"}
+    %link{rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png"}
+    %link{rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png"}
+    %link{rel: "icon", type: "image/png", sizes: "48x48", href: "/favicon-48x48.png"}
+    %link{rel: "icon", type: "image/png", sizes: "64x64", href: "/favicon-64x64.png"}
+    %link{rel: "icon", type: "image/png", sizes: "128x128", href: "/favicon-128x128.png"}
+    %link{rel: "icon", type: "image/png", sizes: "192x192", href: "/favicon-192x192.png"}
+    %link{rel: "icon", type: "image/png", sizes: "256x256", href: "/favicon-256x256.png"}
+    %link{rel: "icon", type: "image/png", sizes: "512x512", href: "/favicon-512x512.png"}
+    
+    -# Apple Touch Icon
+    %link{rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png"}
+    
+    -# Web App Manifest
+    %link{rel: "manifest", href: "/site.webmanifest"}
+    
+    -# Additional Meta Tags for Mobile
+    %meta{name: "theme-color", content: "#ffffff"}
+
+    = stylesheet_link_tag :app, "data-turbo-track": "reload"
+    = javascript_importmap_tags
+
+  %body
+    = yield

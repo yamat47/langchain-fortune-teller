@@ -1,0 +1,45 @@
+= turbo_stream.remove "temp-loading-indicator"
+
+= turbo_stream.append "messages" do
+  - if @system_message_record.messageable_type == 'FortuneResultMessage'
+    = render partial: "messages/fortune_result_message", locals: { message: @system_message_record }
+  - else
+    = render partial: "messages/system_message", locals: { message: @system_message_record }
+
+= turbo_stream.append "messages" do
+  :javascript
+    setTimeout(() => {
+      const form = document.querySelector('[data-controller="fortune-form"]');
+      const button = form?.querySelector('[data-fortune-form-target="button"]');
+      const input = form?.querySelector('[data-fortune-form-target="input"]');
+      
+      if (input) {
+        input.disabled = false;
+        input.value = "";
+      }
+      
+      if (button) {
+        button.disabled = true;
+        button.textContent = "送信";
+        button.classList.add("disabled-empty");
+      }
+      
+      // Try to call reset if controller exists
+      if (window.Stimulus && form) {
+        try {
+          const controller = window.Stimulus.getControllerForElementAndIdentifier(form, 'fortune-form');
+          if (controller) {
+            controller.isSubmitting = false;
+            controller.checkButtonState();
+          }
+        } catch(e) {
+          // Controller may not be accessible
+        }
+      }
+      
+      // Scroll to bottom
+      const messages = document.getElementById('messages');
+      if (messages) {
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }, 100);

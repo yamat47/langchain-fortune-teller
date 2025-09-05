@@ -4,13 +4,19 @@
       %p= @user_message
   
   .message.bot-message
-    .message-content
-      %p
-        %strong= "おすすめのAWSサービス: #{@bot_response[:service]}"
-      %p= @bot_response[:reason]
-      %p.article-link
-        参考記事:
-        %a{href: @bot_response[:article], target: "_blank", rel: "noopener"} 導入事例を見る
+    .message-content.fortune-result
+      .service-recommendation
+        %p.lead-text あなたにおすすめのサービスは...
+        %h2.service-name= @service_name
+        %p.service-subtitle= @service_description
+      
+      .recommendation-reason
+        %p= @reason
+      
+      .reference-section
+        %p.article-link
+          参考記事はこちら：
+          %a{href: @reference_url, target: "_blank", rel: "noopener"} 詳しく見る
 
 = turbo_stream.update "message" do
   = text_field_tag :message, "", 

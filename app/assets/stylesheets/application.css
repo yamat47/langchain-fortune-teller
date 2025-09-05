@@ -167,3 +167,80 @@ body {
 .send-button:active {
   transform: translateY(0);
 }
+
+/* Fortune Result Styles */
+.fortune-result .service-recommendation {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.fortune-result .lead-text {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.fortune-result .service-name {
+  color: #FF9900;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
+  padding: 10px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #FF9900 0%, #FEBD69 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.fortune-result .service-subtitle {
+  color: #888;
+  font-size: 13px;
+  margin-top: 5px;
+  font-style: italic;
+}
+
+.fortune-result .recommendation-reason {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #F7F7F7;
+  border-left: 4px solid #FF9900;
+  border-radius: 5px;
+}
+
+.fortune-result .recommendation-reason p {
+  color: #333;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.fortune-result .reference-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.fortune-result .reference-section .article-link {
+  background-color: #FFF;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.fortune-result .reference-section a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #FF9900 0%, #FEBD69 100%);
+  color: white;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.fortune-result .reference-section a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 153, 0, 0.3);
+  color: white;
+}

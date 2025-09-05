@@ -12,3 +12,6 @@ Metrics/MethodLength:
 
 Metrics/BlockLength:
   Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false

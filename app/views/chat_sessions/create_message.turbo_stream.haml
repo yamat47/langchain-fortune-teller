@@ -1,0 +1,42 @@
+= turbo_stream.append "messages" do
+  = render partial: "messages/user_message", locals: { message: @user_message_record }
+
+= turbo_stream.append "messages" do
+  #temp-loading-indicator.message.bot-message
+    .message-content
+      %p.loading-text 考えています...
+
+= turbo_stream.replace "temp-loading-indicator" do
+  = render partial: "messages/system_message", locals: { message: @system_message_record }
+
+= turbo_stream.append "messages" do
+  :javascript
+    setTimeout(() => {
+      const form = document.querySelector('[data-controller="fortune-form"]');
+      if (form) {
+        const controller = form.closest('[data-controller]');
+        if (controller && controller._stimulusControllers) {
+          const fortuneController = controller._stimulusControllers.find(c => c.identifier === 'fortune-form');
+          if (fortuneController && fortuneController.reset) {
+            fortuneController.reset();
+          }
+        } else {
+          // Fallback: manually reset form
+          const button = form.querySelector('[data-fortune-form-target="button"]');
+          const input = form.querySelector('[data-fortune-form-target="input"]');
+          if (button) {
+            button.disabled = false;
+            button.textContent = "送信";
+          }
+          if (input) {
+            input.disabled = false;
+            input.value = "";
+          }
+        }
+      }
+      // Scroll to bottom
+      const messages = document.getElementById('messages');
+      if (messages) {
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }, 100);

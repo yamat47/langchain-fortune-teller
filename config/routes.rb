@@ -15,4 +15,10 @@ Rails.application.routes.draw do
   root 'fortune_tellings#new'
 
   resources :fortune_tellings, only: %i[new create]
+  
+  resources :chat_sessions, only: [:show], param: :uuid do
+    member do
+      post 'messages', to: 'chat_sessions#create_message'
+    end
+  end
 end

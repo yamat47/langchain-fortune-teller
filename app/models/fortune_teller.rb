@@ -4,7 +4,7 @@ class FortuneTeller
   include ActiveModel::Model
   include ActiveModel::Attributes
 
-  def chat(message)
+  def chat(_message)
     responses = [
       {
         service: 'AWS Lambda',

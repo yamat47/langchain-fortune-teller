@@ -1,8 +1,4 @@
-= turbo_stream.append "messages" do
-  .message.user-message
-    .message-content
-      %p= @user_message
-  
+= turbo_stream.replace "temp-loading-indicator" do
   .message.bot-message
     .message-content.fortune-result
       .service-recommendation
@@ -18,8 +14,33 @@
           参考記事：
           %a{href: @reference_url, target: "_blank", rel: "noopener"} 詳しく見る
 
-= turbo_stream.update "message" do
-  = text_field_tag :message, "", 
-      placeholder: "今の気分を教えてください...", 
-      class: "message-input",
-      autocomplete: "off"
+= turbo_stream.append "messages" do
+  :javascript
+    setTimeout(() => {
+      const form = document.querySelector('[data-controller="fortune-form"]');
+      if (form) {
+        const controller = form.closest('[data-controller]');
+        if (controller && controller._stimulusControllers) {
+          const fortuneController = controller._stimulusControllers.find(c => c.identifier === 'fortune-form');
+          if (fortuneController && fortuneController.reset) {
+            fortuneController.reset();
+          }
+        } else {
+          // Fallback: manually reset form
+          const button = form.querySelector('[data-fortune-form-target="button"]');
+          const input = form.querySelector('[data-fortune-form-target="input"]');
+          if (button) {
+            button.disabled = false;
+            button.textContent = "送信";
+          }
+          if (input) {
+            input.disabled = false;
+          }
+        }
+      }
+      // Scroll to bottom
+      const messages = document.getElementById('messages');
+      if (messages) {
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }, 100);

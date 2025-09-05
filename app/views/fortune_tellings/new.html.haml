@@ -9,10 +9,7 @@
         %p あなたの今の気持ちにぴったりな AWS サービスを一緒に見つけましょう。
 
   .chat-input-container
-    = form_with url: fortune_tellings_path, method: :post, local: false, class: "chat-form" do |f|
+    = form_with url: fortune_tellings_path, method: :post, local: false, class: "chat-form", data: { controller: "fortune-form", action: "submit->fortune-form#submit", turbo_frame: "_top" } do |f|
       .input-group
-        = text_field_tag :message, "", 
-            placeholder: "今の気分を教えてください...", 
-            class: "message-input",
-            autocomplete: "off"
-        = submit_tag "送信", class: "send-button"
+        = text_field_tag :message, "", placeholder: "今の気分を教えてください...", class: "message-input", autocomplete: "off", data: { "fortune-form-target": "input" }
+        = submit_tag "送信", class: "send-button", data: { "fortune-form-target": "button" }

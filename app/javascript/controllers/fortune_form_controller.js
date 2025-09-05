@@ -21,7 +21,6 @@ export default class extends Controller {
 
     this.isSubmitting = true
     this.buttonTarget.disabled = true
-    this.inputTarget.disabled = true
     this.buttonTarget.textContent = "送信中..."
     
     // Add loading indicator to messages
@@ -52,9 +51,6 @@ export default class extends Controller {
       messagesContainer.appendChild(loadingMessage)
       messagesContainer.scrollTop = messagesContainer.scrollHeight
     }
-
-    // Clear input immediately for better UX
-    this.inputTarget.value = ""
   }
 
   reset() {

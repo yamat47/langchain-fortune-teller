@@ -1,0 +1,19 @@
+#chat-container
+  .chat-header
+    %h1 AWS サービス占い - あなたの気分に合うサービスを見つけます
+
+  #messages.messages-container
+    - if @messages.empty?
+      .message.bot-message
+        .message-content
+          %p こんにちは！今日はどんな気分ですか？
+          %p あなたの今の気持ちにぴったりな AWS サービスを一緒に見つけましょう。
+    - else
+      - @messages.each do |message|
+        = render partial: "messages/#{message.messageable_type.underscore}", locals: { message: message }
+
+  .chat-input-container
+    = form_with url: messages_chat_session_path(@chat_session), method: :post, local: false, class: "chat-form", data: { controller: "fortune-form", action: "submit->fortune-form#submit", turbo_frame: "_top" } do |f|
+      .input-group
+        = text_field_tag :message, "", placeholder: "メッセージを入力してください...", class: "message-input", autocomplete: "off", data: { "fortune-form-target": "input" }
+        = submit_tag "送信", class: "send-button", data: { "fortune-form-target": "button" }

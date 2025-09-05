@@ -6,7 +6,7 @@
   .message.bot-message
     .message-content.fortune-result
       .service-recommendation
-        %p.lead-text あなたにおすすめのサービスは...
+        %p.lead-text あなたにぴったりのサービスは...
         %h2.service-name= @service_name
         %p.service-subtitle= @service_description
       
@@ -15,11 +15,11 @@
       
       .reference-section
         %p.article-link
-          参考記事はこちら：
+          参考記事：
           %a{href: @reference_url, target: "_blank", rel: "noopener"} 詳しく見る
 
 = turbo_stream.update "message" do
   = text_field_tag :message, "", 
-      placeholder: "今日の気分を入力してください...", 
+      placeholder: "今の気分を教えてください...", 
       class: "message-input",
       autocomplete: "off"

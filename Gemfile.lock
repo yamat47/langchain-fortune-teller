@@ -117,6 +117,7 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    google_search_results (2.2.0)
     haml (6.3.0)
       temple (>= 0.8.2)
       thor
@@ -371,6 +372,7 @@ DEPENDENCIES
   brakeman
   debug
   factory_bot_rails
+  google_search_results
   haml-rails
   importmap-rails
   jbuilder

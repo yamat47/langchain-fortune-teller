@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'bootsnap', require: false
+gem 'google_search_results'
 gem 'haml-rails'
 gem 'importmap-rails'
 gem 'jbuilder'
